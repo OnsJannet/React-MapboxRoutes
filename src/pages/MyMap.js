@@ -15,7 +15,7 @@ const MyMap = () => {
   const [zoom, setZoom] = useState(12);
   const [waypoints, setWaypoints] = useState([]);
   const [markers, setMarkers] = useState([]);
-  //Currently is 1.33 just put 1.5 to be safe
+  //Currently is 1.33$ just put 1.5$ to be safe
   const [fuelPrice, setFuelPrice] = useState(1.5);
   const [cost, setCost] = useState(0);
 
@@ -103,12 +103,12 @@ const MyMap = () => {
     costElement.style.top = "10px";
     costElement.style.right = "10px";
     costElement.style.backgroundColor = "black";
-    costElement.style.color = "white"; // add this line to make the text white
+    costElement.style.color = "white"; 
     costElement.style.padding = "10px";
     costElement.style.borderRadius = "5px";
-    costElement.style.fontSize = "16px"; // increase font size
-    costElement.style.lineHeight = "1.5"; // increase line height for readability
-    costElement.style.width = "300px"; // make the div wider for better layout
+    costElement.style.fontSize = "16px"; 
+    costElement.style.lineHeight = "1.5"; 
+    costElement.style.width = "300px"; 
     map.current.getContainer().appendChild(costElement);
     
 
