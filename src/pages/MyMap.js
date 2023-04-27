@@ -77,8 +77,7 @@ const MyMap = () => {
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
-      accessToken:
-        accessToken,
+      accessToken: accessToken,
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
       center: [lng, lat],
@@ -86,8 +85,7 @@ const MyMap = () => {
     });
 
     const directions = new MapboxDirections({
-      accessToken:
-        accessToken,
+      accessToken: accessToken,
       unit: "metric",
       profile: "mapbox/driving",
       waypoints: waypoints.map((waypoint) => ({
@@ -110,7 +108,6 @@ const MyMap = () => {
     costElement.style.lineHeight = "1.5"; // increase line height for readability
     costElement.style.width = "300px"; // make the div wider for better layout
     map.current.getContainer().appendChild(costElement);
-    
 
     // listen to the route event to get the distance and duration
     directions.on("route", (event) => {
@@ -122,13 +119,23 @@ const MyMap = () => {
       const cost = distance * fuelConsumption * fuelPrice;
       setCost(cost.toFixed(2));
 
+      // calculate shopping time
+      const numLocations = route.legs.length;
+      const numItems = 50; // assuming 50 items
+      const shoppingTime = (numLocations * 10) + (numItems * 1);
+      
+
       const durationInMinutes = route.duration / 60;
 
       // update the cost element
-      costElement.innerHTML = `Cost of Driving: $${cost.toFixed(2)} <br> Total Driving in KM: $${distance.toFixed(2)} km <br> Drive Time: ${durationInMinutes.toFixed(0)} min`;
+      costElement.innerHTML = `Cost of Driving: $${cost.toFixed(
+        2
+      )} <br> Total Driving in KM: $${distance.toFixed(
+        2
+      )} km <br> Drive Time: ${durationInMinutes.toFixed(
+        0
+      )} min <br> Shopping Time: ${shoppingTime.toFixed(0)} min`;
 
-      console.log("Distance:", distance, "meters");
-      console.log("Duration:", route.duration, "seconds");
     });
 
     // add markers for each store
@@ -168,10 +175,10 @@ const MyMap = () => {
       <div className="w-full md:w-auto ml-10">
         <div className="w-full md:w-auto mt-[80px] mb-[80px] ">
           <h1 className="text-5xl font-bold leading-16 mb-[32px]">
-            How much does a ride to your destincation will cost?
+            How much does a ride to your destination will cost?
           </h1>
           <h1 className="text-[24px] font-normal leading-16">
-            Plan your next trip with the price estimator.
+            Plan your next grocery shopping trip with the price estimator.
           </h1>
         </div>
 
